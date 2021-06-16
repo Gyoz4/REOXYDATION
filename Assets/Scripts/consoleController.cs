@@ -9,26 +9,37 @@ public class consoleController : MonoBehaviour
 {
     public TMP_InputField inputField;
     public TMP_Text consoleLog;
-    int i = 0;
+    public ScrollRect scrollBar;
 
     void Update()
     {
+        
+    }
+
+    public void showText()
+    {
+        command();
+
+        scrollBar.verticalNormalizedPosition = 0f; //scroll to the botom of the text box
+        Canvas.ForceUpdateCanvases();
+
         inputField.ActivateInputField();    // activates the inputfield
+
+        inputField.text = "";
     }
 
-    public void sendit()
+    public void command()
     {
-        Debug.Log("get text " + i);
-        getit();
-        i++;
-    }
+        if (inputField.text != "")
+        {
+            //consoleLog.text = consoleLog.text + "\n>> " + inputField.text;
 
-    public void getit()
-    {
-        string txt = inputField.text;
-        string log = consoleLog.text;
-        string x = log + "\n>> " + txt;
-        consoleLog.text = x;
-        Debug.Log(txt);
+            switch (inputField.text)
+            {
+                case "blue":
+                    consoleLog.text = consoleLog.text + "\n>> " + string.Format("<color=blue>{0}</color>", inputField.text);
+                    break;
+            }
+        }
     }
 }

@@ -10,15 +10,18 @@ public class consoleController : MonoBehaviour
     public TMP_InputField inputField;
     public TMP_Text consoleLog;
     public ScrollRect scrollBar;
+    string userLine = "/";
+    string responceLine = ">> ";
 
-    void Update()
-    {
-        
-    }
+    List<string> commands = new List<string>() {
+        "blue",
+        "red", 
+        "penis", 
+        "echo"};
 
     public void showText()
     {
-        command();
+        lineParser();
 
         scrollBar.verticalNormalizedPosition = 0f; //scroll to the botom of the text box
         Canvas.ForceUpdateCanvases();
@@ -28,18 +31,32 @@ public class consoleController : MonoBehaviour
         inputField.text = "";
     }
 
-    public void command()
+    public void lineParser()
     {
-        if (inputField.text != "")
-        {
-            //consoleLog.text = consoleLog.text + "\n>> " + inputField.text;
+        // add ff to the end of all hex colours  to account for opacity
+        List<string> tokens = new List<string>(inputField.text.Split(' '));
 
-            switch (inputField.text)
+        if (commands.Contains(tokens[0]))
+        {
+            switch (tokens[0])
             {
                 case "blue":
-                    consoleLog.text = consoleLog.text + "\n>> " + string.Format("<color=blue>{0}</color>", inputField.text);
+                    consoleLog.text = consoleLog.text + "\n" + userLine + string.Format("<color=blue>{0}</color>", tokens[0]);
                     break;
+                case "red":
+                    consoleLog.text = consoleLog.text + "\n" + userLine + string.Format("<color=red>{0}</color>", tokens[0]);
+                    break;
+                case "penis":
+                    consoleLog.text = consoleLog.text + "\n" + userLine + string.Format("<color=#ff00ffff>{0}</color>", tokens[0]);
+                    consoleLog.text = consoleLog.text + "\n"+ responceLine + string.Format("<color=purple>haha very funny</color>");
+                    break;
+                case "echo":
+                    consoleLog.text = consoleLog.text + "\n" + userLine + string.Format("<color=#00ff00ff>{0}</color>", tokens[0]);
+                    consoleLog.text = consoleLog.text + "\n" + responceLine + string.Format("<color=#008000ff>{0}</color>", tokens[1]);
+                    break;
+
             }
+            Debug.Log(inputField.text);
         }
     }
 }

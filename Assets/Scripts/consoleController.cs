@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class consoleController : MonoBehaviour
+public class ConsoleController : MonoBehaviour
 {
     public TMP_InputField inputField;
     public TMP_Text consoleLog;

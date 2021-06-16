@@ -1474,7 +1474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputField: {fileID: 1556364161}
-  consoleLog: {fileID: 1973633934}
+  consoleLog: {fileID: 974404925}
   scrollBar: {fileID: 1152519583}
 --- !u!1 &1556364159
 GameObject:

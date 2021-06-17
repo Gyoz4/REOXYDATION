@@ -10,6 +10,8 @@ public class ConsoleController : MonoBehaviour
     public TMP_InputField inputField;
     public TMP_Text consoleLog;
     public ScrollRect scrollBar;
+
+
     string userLine = "/";
     string responceLine = ">> ";
 
@@ -17,7 +19,8 @@ public class ConsoleController : MonoBehaviour
         "blue",
         "red", 
         "penis", 
-        "echo"};
+        "echo",
+        "note"};
 
     public void showText()
     {
@@ -56,7 +59,7 @@ public class ConsoleController : MonoBehaviour
                     break;
 
             }
-            Debug.Log(inputField.text);
+            //Debug.Log(inputField.text);
         }
     }
 }

@@ -6,12 +6,7 @@ public class credits : MonoBehaviour
 {
 	public GameObject MainMenu;
 	public GameObject Credits;
-
-    public void Awake()
-    {
-        Credits.SetActive(false);
-    }
-    public void credit()
+	public void credit()
 	{
 		Credits.SetActive(true);
 		MainMenu.SetActive(false);

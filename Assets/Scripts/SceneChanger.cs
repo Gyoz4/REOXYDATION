@@ -11,9 +11,10 @@ public class SceneChanger : MonoBehaviour
     public void Awake()
     {
 		Screen.fullScreen = true;
-    }
+		Settings.SetActive(false);
+	}
 
-    public void ChangeScene(string sceneName)
+	public void ChangeScene(string sceneName)
 	{
 		SceneManager.LoadScene(sceneName);
 	}

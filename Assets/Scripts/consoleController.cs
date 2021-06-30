@@ -20,7 +20,7 @@ public class ConsoleController : MonoBehaviour
         "red", 
         "penis", 
         "echo",
-        "note"};
+        "attack"};
 
     public void showText()
     {
@@ -57,9 +57,13 @@ public class ConsoleController : MonoBehaviour
                     consoleLog.text = consoleLog.text + "\n" + userLine + string.Format("<color=#00ff00ff>{0}</color>", tokens[0]);
                     consoleLog.text = consoleLog.text + "\n" + responceLine + string.Format("<color=#008000ff>{0}</color>", tokens[1]);
                     break;
+                case "attack":
+                    consoleLog.text = consoleLog.text + "\n" + userLine + string.Format("<color=red>{0}</color>", tokens[0]);
+                    consoleLog.text = consoleLog.text + "\n" + responceLine + string.Format("<color=yellow>You did {0} damage</color>", 10);
+                    break;
 
             }
-            //Debug.Log(inputField.text);
+            Debug.Log(inputField.text);
         }
     }
 }

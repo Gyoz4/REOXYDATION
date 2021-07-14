@@ -18,13 +18,8 @@ public class consoleController : MonoBehaviour
     string userLine = "/";
     string responceLine = ">> ";
 
-    float timer = 0;
-    bool timerReached = false;
-    int delay;
-
-    bool playerTurn = true;
+    public bool playerTurn = true;
     int stage = 0;
-
 
     List<string> commands = new List<string>() { // list of all valid commands
         "blue", //this is a test command
@@ -36,8 +31,8 @@ public class consoleController : MonoBehaviour
 
     private void Start()
     {
-        delay = PlayerPrefs.GetInt("delay");
-        flip();
+        //delay = PlayerPrefs.GetInt("delay");
+        //flip(); // flips the arrow, not used rn because cant get enemy turn delay to work
     }
 
     public class Character // the class all enemies and the playes are based off
@@ -68,12 +63,12 @@ public class consoleController : MonoBehaviour
     public Character enemy = new Character(2, 0, 0, 7, 0f, 0f, 75); // cretaes a basic enemy
     public Character boss = new Character(3, 0, 0, 10, 0.05f, 0f, 150); // creates a boss enemy
 
-    private void flip()
+    /*private void flip() 
     {
         Vector3 theScale = GameObject.Find("arrow").transform.localScale;
         theScale.x *= -1;
         GameObject.Find("arrow").transform.localScale = theScale;
-    }
+    }*/
 
     int damageCalc(Character name)//calculates the damage done by any enemy
     {
@@ -97,11 +92,15 @@ public class consoleController : MonoBehaviour
         {
             responce(false, "you killed an enemy", "green");
             stage++;
+            player.hp += 20;
+            enemy.hp = 75;
         }
         else if (boss.hp <= 0)
         {
             responce(false, "you killed a boss", "green");
             stage++;
+            player.hp += 20;
+            boss.hp = 150;
         }
     }
 
@@ -151,10 +150,22 @@ public class consoleController : MonoBehaviour
                 case "attack":
                     responce(true, tokens[0], "red");
                     dmg = damageCalc(player);
-                    responce(true, "You did " + dmg + " damage!", "yellow");
+                    responce(false, "You did " + dmg + " damage!", "yellow");
                     enemy.hp = enemy.hp - dmg;
                     deathCheck();
-                    playerTurn = false;
+
+                    if (stage % 3 == 1)
+                    {
+                        int bossDMG = damageCalc(boss);
+                        player.hp -= bossDMG;
+                        responce(false, "You took " + bossDMG + "damage from the boss", "red");
+                    }
+                    else if (stage % 3 != 1)
+                    {
+                        int enemyDMG = damageCalc(enemy);
+                        player.hp -= enemyDMG;
+                        responce(false, "You took " + enemyDMG + "damage from the enemy", "red");
+                    }
                     break;
                 case "health":
                     responce(true, tokens[0], "blue");
@@ -179,7 +190,8 @@ public class consoleController : MonoBehaviour
         string thisispainfixthis = "Health: " + player.hp.ToString() + "\n" +
             "Base Damage: " + player.baseD.ToString() + "\n" +
             "Crit chance: " + ((player.crit + player.baseC)*100).ToString() + "%\n" +
-            "Burn damage: " + player.burn.ToString();
+            "Burn damage: " + player.burn.ToString() + "\n" +
+            "Stage: " + stage.ToString();
 
         statsTxt.text = thisispainfixthis;
     }

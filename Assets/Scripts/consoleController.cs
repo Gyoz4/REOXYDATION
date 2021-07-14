@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Collections;
 
 public class consoleController : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class consoleController : MonoBehaviour
     string responceLine = ">> ";
 
     int delay = PlayerPrefs.GetInt("delay");
+    float timer = 0;
+    bool timerReached = false;
+
 
     bool playerTurn;
     int stage = 0;
@@ -59,7 +63,7 @@ public class consoleController : MonoBehaviour
     public Character enemy = new Character(2, 0, 0, 7, 0f, 0f, 75); // cretaes a basic enemy
     public Character boss = new Character(3, 0, 0, 10, 0.05f, 0f, 150); // creates a boss enemy
 
-    private void Start()
+    private void flip()
     {
         Vector3 theScale = GameObject.Find("arrow").transform.localScale;
         theScale.x *= -1;
@@ -107,14 +111,23 @@ public class consoleController : MonoBehaviour
             inputField.ActivateInputField();    // activates the inputfield
             inputField.text = "";
 
-            playerTurn = false;
         }
-        else if (!playerTurn)
+        else if (!playerTurn)// timer stuff from (https://stackoverflow.com/questions/30056471/how-to-make-the-script-wait-sleep-in-a-simple-way-in-unity)
         {
+            flip();
+            if (!timerReached)
+                timer += Time.deltaTime;
 
-            inputField.ActivateInputField();
-            inputField.text = "";
-            playerTurn = true;
+            if (!timerReached && timer > delay)
+            {
+                player.hp -= damageCalc(enemy);
+
+                inputField.ActivateInputField();
+                inputField.text = "";
+                timerReached = true;
+                playerTurn = true;
+                flip();
+            }
         }
     }
 
@@ -158,6 +171,7 @@ public class consoleController : MonoBehaviour
                     responce(true, "You did " + dmg + " damage!", "yellow");
                     enemy.hp = enemy.hp - dmg;
                     deathCheck();
+                    playerTurn = false;
                     break;
                 case "health":
                     responce(true, tokens[0], "blue");

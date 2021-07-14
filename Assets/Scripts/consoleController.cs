@@ -18,12 +18,11 @@ public class consoleController : MonoBehaviour
     string userLine = "/";
     string responceLine = ">> ";
 
-    int delay = PlayerPrefs.GetInt("delay");
     float timer = 0;
     bool timerReached = false;
+    int delay;
 
-
-    bool playerTurn;
+    bool playerTurn = true;
     int stage = 0;
 
 
@@ -34,6 +33,12 @@ public class consoleController : MonoBehaviour
         "echo", //this is a test command
         "attack",
         "health"};
+
+    private void Start()
+    {
+        delay = PlayerPrefs.GetInt("delay");
+        flip();
+    }
 
     public class Character // the class all enemies and the playes are based off
     {
@@ -102,33 +107,11 @@ public class consoleController : MonoBehaviour
 
     public void showText()
     {
-        if (playerTurn) // turn swapper
-        {
-            lineParser();
-
-            scrollBar.verticalNormalizedPosition = 0f; //scroll to the botom of the text box
-            Canvas.ForceUpdateCanvases();
-            inputField.ActivateInputField();    // activates the inputfield
-            inputField.text = "";
-
-        }
-        else if (!playerTurn)// timer stuff from (https://stackoverflow.com/questions/30056471/how-to-make-the-script-wait-sleep-in-a-simple-way-in-unity)
-        {
-            flip();
-            if (!timerReached)
-                timer += Time.deltaTime;
-
-            if (!timerReached && timer > delay)
-            {
-                player.hp -= damageCalc(enemy);
-
-                inputField.ActivateInputField();
-                inputField.text = "";
-                timerReached = true;
-                playerTurn = true;
-                flip();
-            }
-        }
+        lineParser();
+        scrollBar.verticalNormalizedPosition = 0f; //scroll to the botom of the text box
+        Canvas.ForceUpdateCanvases();
+        inputField.ActivateInputField();    // activates the inputfield
+        inputField.text = "";
     }
 
     private void responce(bool user, string text, string color) // used for printing to the log

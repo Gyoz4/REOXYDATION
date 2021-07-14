@@ -2610,9 +2610,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de684586c3d103748a483ed26c00f29b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputField: {fileID: 0}
-  consoleLog: {fileID: 0}
-  scrollBar: {fileID: 0}
+  inputField: {fileID: 1556364161}
+  consoleLog: {fileID: 1973633934}
+  scrollBar: {fileID: 1152519583}
 --- !u!1 &1619274109
 GameObject:
   m_ObjectHideFlags: 0

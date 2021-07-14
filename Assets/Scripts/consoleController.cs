@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -13,6 +12,7 @@ public class consoleController : MonoBehaviour
 
     int playerHP = 100;
     int enemyHP = 100;
+    int dmg;
 
 
     string userLine = "/";
@@ -66,8 +66,9 @@ public class consoleController : MonoBehaviour
                     break;
                 case "attack":
                     consoleLog.text = consoleLog.text + "\n" + userLine + string.Format("<color=red>{0}</color>", tokens[0]);
-                    consoleLog.text = consoleLog.text + "\n" + responceLine + string.Format("<color=yellow>You did {0} damage</color>", 10);
-                    damageCalc();
+                    dmg = damageCalc();
+                    consoleLog.text = consoleLog.text + "\n" + responceLine + string.Format("<color=yellow>You did {0} damage</color>", dmg);
+                    enemyHP -= dmg;
                     break;
                 case "health":
                     consoleLog.text = consoleLog.text + "\n" + userLine + string.Format("<color=blue>{0}</color>", tokens[0]);
@@ -81,11 +82,26 @@ public class consoleController : MonoBehaviour
         }
     }
 
-    void damageCalc()
+    int damageCalc()
     {
         int baseDMG = 5;
-        double baseCritChance = 0.1f;
+        double baseCritChance = 0.05f;
         int Fdamage;
-        int burn;
+        int burn = 0;
+        int bonusCrit = 0;
+
+        Fdamage = baseDMG + burn;
+
+        if (NextFloat(0, 1) <= baseCritChance + bonusCrit)
+            return Fdamage * 2;
+        else
+            return Fdamage;
+    }
+
+    static float NextFloat(float min, float max)
+    {
+        System.Random random = new System.Random();
+        double val = (random.NextDouble() * (max - min) + min);
+        return (float)val;
     }
 }

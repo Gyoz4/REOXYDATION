@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class ConsoleController : MonoBehaviour
+public class consoleController : MonoBehaviour
 {
     public TMP_InputField inputField;
     public TMP_Text consoleLog;
@@ -14,6 +14,7 @@ public class ConsoleController : MonoBehaviour
 
     string userLine = "/";
     string responceLine = ">> ";
+
 
     List<string> commands = new List<string>() {
         "blue",
@@ -44,10 +45,10 @@ public class ConsoleController : MonoBehaviour
             switch (tokens[0])
             {
                 case "blue":
-                    consoleLog.text = consoleLog.text + "\n" + userLine + string.Format("<color=blue>{0}</color>", tokens[0]);
+                    GameObject.Find("Enemy").GetComponent<enemyController>().EnemyUpdate(tokens[0]);
                     break;
                 case "red":
-                    consoleLog.text = consoleLog.text + "\n" + userLine + string.Format("<color=red>{0}</color>", tokens[0]);
+                    GameObject.Find("Enemy").GetComponent<enemyController>().EnemyUpdate(tokens[0]);
                     break;
                 case "penis":
                     consoleLog.text = consoleLog.text + "\n" + userLine + string.Format("<color=#ff00ffff>{0}</color>", tokens[0]);

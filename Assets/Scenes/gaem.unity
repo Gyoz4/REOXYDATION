@@ -1350,6 +1350,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ac25550bde3e74aa762d705db4d05c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blue: {fileID: 0}
+  red: {fileID: 0}
+  green: {fileID: 0}
 --- !u!1 &1117271012
 GameObject:
   m_ObjectHideFlags: 0
@@ -2318,7 +2321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputField: {fileID: 1556364161}
-  consoleLog: {fileID: 974404925}
+  consoleLog: {fileID: 1973633934}
   scrollBar: {fileID: 1152519583}
 --- !u!1 &1517553971
 GameObject:
@@ -2331,6 +2334,7 @@ GameObject:
   - component: {fileID: 1517553972}
   - component: {fileID: 1517553974}
   - component: {fileID: 1517553973}
+  - component: {fileID: 1517553975}
   m_Layer: 5
   m_Name: Enemy
   m_TagString: Untagged
@@ -2394,6 +2398,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517553971}
   m_CullTransparentMesh: 0
+--- !u!114 &1517553975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517553971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ac25550bde3e74aa762d705db4d05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blue: {fileID: 21300000, guid: 3eb839cf42d048d4ea0a07c85cb2fdbb, type: 3}
+  red: {fileID: 21300000, guid: 4a2f25bb422bf3747bebf81b99daa296, type: 3}
+  green: {fileID: 21300000, guid: 03f2b25566cf8a14f85440cc5097a497, type: 3}
 --- !u!1 &1556364159
 GameObject:
   m_ObjectHideFlags: 0
@@ -2591,9 +2610,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de684586c3d103748a483ed26c00f29b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputField: {fileID: 1556364161}
-  consoleLog: {fileID: 1973633934}
-  scrollBar: {fileID: 1152519583}
+  inputField: {fileID: 0}
+  consoleLog: {fileID: 0}
+  scrollBar: {fileID: 0}
 --- !u!1 &1619274109
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class consoleController : MonoBehaviour
     string responceLine = ">> ";
 
     public bool playerTurn = true;
-    int stage = 0;
+    public static int stage = 0;
 
     List<string> commands = new List<string>() { // list of all valid commands
         "blue", //this is a test command
@@ -29,14 +29,7 @@ public class consoleController : MonoBehaviour
         "attack",
         "health"};
 
-    private void Start()
-    {
-        //delay = PlayerPrefs.GetInt("delay");
-        //flip(); // flips the arrow, not used rn because cant get enemy turn delay to work
-    }
-
-    public class Character // the class all enemies and the playes are based off
-    {
+    public class Character { // the class all enemies and the playes are based off
         public int burn; //burn damge
         public int burnD; // burn duration
         public int burnS; // burn stacks 
@@ -47,8 +40,7 @@ public class consoleController : MonoBehaviour
 
         public int hp; // the hp
 
-        public Character(int bur, int burD, int burS, int basD, float basC, float cri, int HP)
-        {
+        public Character(int bur, int burD, int burS, int basD, float basC, float cri, int HP) {
             burn = bur;
             burnD = burD;
             burnS = burS;
@@ -60,18 +52,10 @@ public class consoleController : MonoBehaviour
     }
 
     public Character player = new Character(3, 0, 0, 10, 0.05f, 0f, 100); // creates the player with all stats
-    public Character enemy = new Character(2, 0, 0, 7, 0f, 0f, 75); // cretaes a basic enemy
-    public Character boss = new Character(3, 0, 0, 10, 0.05f, 0f, 150); // creates a boss enemy
+    public Character enemy = new Character(2, 0, 0, 7, 0f, 0f, 50); // cretaes a basic enemy
+    public Character boss = new Character(3, 0, 0, 10, 0.05f, 0f, 125); // creates a boss enemy
 
-    /*private void flip() 
-    {
-        Vector3 theScale = GameObject.Find("arrow").transform.localScale;
-        theScale.x *= -1;
-        GameObject.Find("arrow").transform.localScale = theScale;
-    }*/
-
-    int damageCalc(Character name)//calculates the damage done by any enemy
-    {
+    int damageCalc(Character name) { //calculates the damage done by any enemy
         int FD; // final damage before crit and other effects
         if (name.burnD > 0)
             FD = name.baseD + name.burn * name.burnS;
@@ -84,28 +68,27 @@ public class consoleController : MonoBehaviour
             return FD;
     }
 
-    void deathCheck() // called when damage is taken by anyone to check their health and act accordingly
-    {
+    void deathCheck() { // called when damage is taken by anyone to check their health and act accordingly
         if (player.hp <= 0)
             responce(false, "you died", "red");
-        else if (enemy.hp <= 0)
-        {
+        else if (enemy.hp <= 0) {
             responce(false, "you killed an enemy", "green");
             stage++;
             player.hp += 20;
             enemy.hp = 75;
         }
-        else if (boss.hp <= 0)
-        {
+        else if (boss.hp <= 0) {
             responce(false, "you killed a boss", "green");
             stage++;
-            player.hp += 20;
-            boss.hp = 150;
+            player.hp += 25;
+            if (stage == 9)
+                boss.hp = 200;
+            else
+                boss.hp = 150;
         }
     }
 
-    public void showText()
-    {
+    public void showText() {
         lineParser();
         scrollBar.verticalNormalizedPosition = 0f; //scroll to the botom of the text box
         Canvas.ForceUpdateCanvases();
@@ -113,8 +96,7 @@ public class consoleController : MonoBehaviour
         inputField.text = "";
     }
 
-    private void responce(bool user, string text, string color) // used for printing to the log
-    {
+    private void responce(bool user, string text, string color) { // used for printing to the log
         if (user)
             consoleLog.text = consoleLog.text + "\n" + userLine + string.Format("<color={0}>" + text + "</color>", color);
         else if (!user)
@@ -122,15 +104,12 @@ public class consoleController : MonoBehaviour
 
     }
 
-    public void lineParser()
-    {
+    public void lineParser() {
         // add ff to the end of all hex colours to account for opacity
         List<string> tokens = new List<string>(inputField.text.Split(' '));
 
-        if (commands.Contains(tokens[0]))
-        {
-            switch (tokens[0])
-            {
+        if (commands.Contains(tokens[0])) {
+            switch (tokens[0]) {
                 case "blue":
                     GameObject.Find("Enemy").GetComponent<enemyController>().EnemyUpdate(tokens[0]);
                     responce(true, tokens[0], "blue");
@@ -154,17 +133,23 @@ public class consoleController : MonoBehaviour
                     enemy.hp = enemy.hp - dmg;
                     deathCheck();
 
-                    if (stage % 3 == 1)
-                    {
-                        int bossDMG = damageCalc(boss);
-                        player.hp -= bossDMG;
-                        responce(false, "You took " + bossDMG + "damage from the boss", "red");
-                    }
-                    else if (stage % 3 != 1)
+                    if (stage == 0)
                     {
                         int enemyDMG = damageCalc(enemy);
                         player.hp -= enemyDMG;
-                        responce(false, "You took " + enemyDMG + "damage from the enemy", "red");
+                        responce(false, "You took " + enemyDMG + " damage from the enemy", "red");
+                    }
+                    else if (stage % 3 == 0)
+                    {
+                        int bossDMG = damageCalc(boss);
+                        player.hp -= bossDMG;
+                        responce(false, "You took " + bossDMG + " damage from the boss", "red");
+                    }
+                    else if (stage % 3 != 0)
+                    {
+                        int enemyDMG = damageCalc(enemy);
+                        player.hp -= enemyDMG;
+                        responce(false, "You took " + enemyDMG + " damage from the enemy", "red");
                     }
                     break;
                 case "health":
@@ -178,15 +163,13 @@ public class consoleController : MonoBehaviour
         }
     }
 
-    static float NextFloat(float min, float max) // random double (https://www.codegrepper.com/code-examples/csharp/c%23+random+float+between+two+numbers)
-    {
+    static float NextFloat(float min, float max) { // random double (https://www.codegrepper.com/code-examples/csharp/c%23+random+float+between+two+numbers)
         System.Random random = new System.Random();
         double val = (random.NextDouble() * (max - min) + min);
         return (float)val;
     }
 
-    private void Update() // used for updating stats
-    {
+    private void Update() { // used for updating stats
         string thisispainfixthis = "Health: " + player.hp.ToString() + "\n" +
             "Base Damage: " + player.baseD.ToString() + "\n" +
             "Crit chance: " + ((player.crit + player.baseC)*100).ToString() + "%\n" +

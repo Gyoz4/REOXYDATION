@@ -11,12 +11,10 @@ public class loadColour : MonoBehaviour
     public Sprite red;
     public Sprite white;
 
-    private void Awake()
-    {
+    private void Awake() {
         int colour = PlayerPrefs.GetInt("colour");
 
-        switch (colour)
-        {
+        switch (colour) {
             case 0:
                 GetComponent<Image>().sprite = blue;
                 break;
@@ -36,6 +34,6 @@ public class loadColour : MonoBehaviour
                 GetComponent<Image>().sprite = blue;
                 break;
         }
-        Debug.Log(colour);
+        //Debug.Log(colour);
     }
 }

@@ -3,21 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class enemyController : MonoBehaviour
-{
+public class enemyController : MonoBehaviour {
     public Sprite blue;
     public Sprite red;
     public Sprite green;
 
-    private void Awake()
-    {
+    private void Awake() {
         GetComponent<Image>().sprite = green;
     }
 
-    public void EnemyUpdate(string name)
-    {
-        switch (name)
-        {
+    public void EnemyUpdate(string name) {
+        switch (name) {
             case "red":
                 GetComponent<Image>().sprite = red;
                 break;
@@ -25,6 +21,5 @@ public class enemyController : MonoBehaviour
                 GetComponent<Image>().sprite = blue;
                 break;
         }
-        Debug.Log("thing works gey");
     }
 }

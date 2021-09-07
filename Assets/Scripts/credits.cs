@@ -16,9 +16,4 @@ public class credits : MonoBehaviour
 		Credits.SetActive(true);
 		MainMenu.SetActive(false);
 	}
-
-    private void OnApplicationQuit()
-    {
-		Application.CancelQuit();
-    }
 }

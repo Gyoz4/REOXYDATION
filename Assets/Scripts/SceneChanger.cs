@@ -1,14 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System;
+using System.Collections;
+using System.Linq;
 using UnityEngine.SceneManagement;
-
 public class SceneChanger : MonoBehaviour
 {
 	public GameObject MainMenu;
 	public GameObject Settings;
+	public TMP_Text txt;
 
-    public void Awake()
+
+	public void Awake()
     {
 		Screen.fullScreen = true;
 		Settings.SetActive(false);
@@ -36,4 +41,13 @@ public class SceneChanger : MonoBehaviour
 			MainMenu.SetActive(false);
 		}
 	}
+
+    private void Update() {
+		if (consoleController.finished)
+			txt.text = "Congrats you beat this very hard game !!!!!";
+		else if (consoleController.dead)
+			txt.text = "You died and failed";
+		else
+			txt.text = "";
+    }
 }

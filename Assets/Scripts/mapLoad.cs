@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class mapLoad : MonoBehaviour
-{
+public class mapLoad : MonoBehaviour {
     public Sprite map0;
     public Sprite map1;
     public Sprite map2;

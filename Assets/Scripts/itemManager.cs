@@ -1,7 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using System;
+using System.Collections;
+using System.Linq;
 
 
 public class itemManager : MonoBehaviour {
@@ -14,11 +17,13 @@ public class itemManager : MonoBehaviour {
     static float mythicRate = 0.05f;
     public TMP_Text itemtest;
 
-    int i = (int)NextFloat(1, 5);
+    int i;
 
-    float dropRate;
+    double dropRate;
 
-    List<string> items = new List<string>() { };
+    System.Random rand = new System.Random();
+
+    public static List<string> items = new List<string>() { };
 
     List<string> common = new List<string>() {
         "01",
@@ -49,7 +54,6 @@ public class itemManager : MonoBehaviour {
     List<string> legendary = new List<string>() {
         "25",
         "26",
-        "27",
         "28"};
 
     List<string> mythic = new List<string>() {
@@ -58,22 +62,22 @@ public class itemManager : MonoBehaviour {
 
     public void Quality() {
         Debug.Log("------------------------------------------------------");
-        dropRate = NextFloat(0, 1);
+        dropRate = rand.NextDouble();
 
         switch (true) {
             case bool expression when dropRate < 0.05f:
                 Debug.Log("mythic");
-                i = (int)NextFloat(0, 1);
+                i =  Convert.ToInt32(rand.NextDouble());
                 items.Add(mythic[i]);
                 break;
             case bool expression when dropRate < 0.08f:
                 Debug.Log("legendary");
-                i = (int)NextFloat(0, 3);
+                i = Convert.ToInt32(GetRandomNumber(0, 3));
                 items.Add(legendary[i]);
                 break;
             case bool expression when dropRate < 0.12f:
                 Debug.Log("ebic");
-                i = (int)NextFloat(0, 4);
+                i = Convert.ToInt32(GetRandomNumber(0, 4));
                 items.Add(ebic[i]);
                 break;
             case bool expression when dropRate < 0.20f:
@@ -82,21 +86,15 @@ public class itemManager : MonoBehaviour {
                 break;
             case bool expression when dropRate < 0.25f:
                 Debug.Log("uncommon");
-                i = (int)NextFloat(0, 5);
+                i = Convert.ToInt32(GetRandomNumber(0, 5));
                 items.Add(unCommon[i]);
                 break;
             case bool expression when dropRate > 0.25f:
                 Debug.Log("common");
-                i = (int)NextFloat(0, 5);
+                i = Convert.ToInt32(GetRandomNumber(0, 5));
                 items.Add(common[i]);
                 break;
         }
-    }
-
-    static float NextFloat(float min, float max) { // random double (https://www.codegrepper.com/code-examples/csharp/c%23+random+float+between+two+numbers)
-        System.Random random = new System.Random();
-        double val = (random.NextDouble() * (max - min) + min);
-        return (float)val;
     }
 
     private void Update() {
@@ -104,66 +102,9 @@ public class itemManager : MonoBehaviour {
         foreach (string a in items) {
             itemtest.text = itemtest.text += a + " ";
         }
-
     }
 
-    public void CheckItem() {
-        switch (true) {
-            //common
-            case bool expression when items.Contains("01") == true:
-                break;
-            case bool expression when items.Contains("02") == true:
-                break;
-            case bool expression when items.Contains("03") == true:
-                break;
-            case bool expression when items.Contains("04") == true:
-                break;
-            case bool expression when items.Contains("06") == true:
-                break;
-            case bool expression when items.Contains("07") == true:
-                break;
-            //uncommon
-            case bool expression when items.Contains("09") == true:
-                break;
-            case bool expression when items.Contains("10") == true:
-                break;
-            case bool expression when items.Contains("11") == true:
-                break;
-            case bool expression when items.Contains("12") == true:
-                break;
-            case bool expression when items.Contains("13") == true:
-                break;
-            case bool expression when items.Contains("14") == true:
-                break;
-            //rare
-            case bool expression when items.Contains("18") == true:
-                break;
-            //ebic
-            case bool expression when items.Contains("19") == true:
-                break;
-            case bool expression when items.Contains("20") == true:
-                break;
-            case bool expression when items.Contains("21") == true:
-                break;
-            case bool expression when items.Contains("22") == true:
-                break;
-            case bool expression when items.Contains("23") == true:
-                break;
-            //legendary
-            case bool expression when items.Contains("25") == true:
-                break;
-            case bool expression when items.Contains("26") == true:
-                break;
-            case bool expression when items.Contains("27") == true:
-                break;
-            case bool expression when items.Contains("28") == true:
-                break;
-            //mythic
-            case bool expression when items.Contains("29") == true:
-                break;
-            case bool expression when items.Contains("30") == true:
-                break;
-
-        }
+    public double GetRandomNumber(double minimum, double maximum) { //  https://stackoverflow.com/questions/1064901/random-number-between-2-double-numbers
+        return rand.NextDouble() * (maximum - minimum) + minimum;
     }
 }

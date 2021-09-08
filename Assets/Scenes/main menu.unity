@@ -6522,6 +6522,11 @@ PrefabInstance:
       propertyPath: Settings
       value: 
       objectReference: {fileID: 848740416}
+    - target: {fileID: 58940666955317710, guid: 3a398e90b18b323498ce076b91fcebd8,
+        type: 3}
+      propertyPath: Tutorial
+      value: 
+      objectReference: {fileID: 488496283}
     - target: {fileID: 58940666955317711, guid: 3a398e90b18b323498ce076b91fcebd8,
         type: 3}
       propertyPath: m_Name

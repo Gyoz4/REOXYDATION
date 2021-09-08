@@ -19,6 +19,8 @@ public class SceneChanger : MonoBehaviour
     {
 		Screen.fullScreen = true;
 		Settings.SetActive(false);
+		Tutorial.SetActive(false);
+		MainMenu.SetActive(true);
 	}
 
 	public void ChangeScene(string sceneName)

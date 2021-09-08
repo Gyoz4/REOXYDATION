@@ -346,78 +346,76 @@ public class consoleController : MonoBehaviour
                     deathCheck();
                     break;
                 case "item":
-                    if (admin) {
-                        responce(true, tokens[0] + " " + tokens[1], "green");
-                        switch (tokens[1]) {
-                            case "01":
-                                responce(false, "Knif, 10% bleed chance per item", "blue");
-                                break;
-                            case "02":
-                                responce(false, "Crit Lenses, 5% crit chance per item", "blue");
-                                break;
-                            case "03":
-                                responce(false, "Bigger Bullet, 10% bonus damage to bosses per item", "blue");
-                                break;
-                            case "04":
-                                responce(false, "Armor, reduce damage by one per item", "blue");
-                                break;
-                            case "06":
-                                responce(false, "Steak, +10 max hp per item", "blue");
-                                break;
-                            case "07":
-                                responce(false, "Guilotine, 50 % more damage to full health enemies", "blue");
-                                break;
-                            case "09":
-                                responce(false, "Stun Grenade, 10% stun chance per item", "blue");
-                                break;
-                            case "10":
-                                responce(false, "Vampic Scepter, crit helas for 10% damage dealt", "blue");
-                                break;
-                            case "11":
-                                responce(false, "Choccy Milk, 10%  max health per item", "blue");
-                                break;
-                            case "12":
-                                responce(false, "Risky Fungus, no action heals for 5% max hp", "blue");
-                                break;
-                            case "13":
-                                responce(false, "Thorns, Return 10% damage taken", "blue");
-                                break;
-                            case "14":
-                                responce(false, "Pink Bull, 10% moove speed/dodge chance per item", "blue");
-                                break;
-                            case "18":
-                                responce(false, "Penetrator, 10% chance per item to deal 25% damage again ", "blue");
-                                break;
-                            case "20":
-                                responce(false, "Triumph, on kill heal 5% per item", "blue");
-                                break;
-                            case "21":
-                                responce(false, "Band A, if done >20 dmg +50% damage and heal", "blue");
-                                break;
-                            case "22":
-                                responce(false, "Band B, if done >20 dmg +50% damage and apply bleed)", "blue");
-                                break;
-                            case "23":
-                                responce(false, "Red Filter, crits stack bleed", "blue");
-                                break;
-                            case "25":
-                                responce(false, "Beacon, on death resurect with 50% hp", "blue");
-                                break;
-                            case "26":
-                                responce(false, "More Leaf Clover, +1 rolls for favourable outcomes", "blue");
-                                break;
-                            case "28":
-                                responce(false, "Holy Steak, Double helaing", "blue");
-                                break;
-                            case "30":
-                                responce(false, "Stone Mask, on death resurect with 100% hp", "blue");
-                                break;
-                            default:
-                                responce(false, "this item was either removed or doenst exist at all", "red");
-                                break;
-                        }
-                        
+                    responce(true, tokens[0] + " " + tokens[1], "green");
+                    switch (tokens[1]) {
+                        case "01":
+                            responce(false, "Knif, 10% bleed chance per item", "blue");
+                            break;
+                        case "02":
+                            responce(false, "Crit Lenses, 5% crit chance per item", "blue");
+                            break;
+                        case "03":
+                            responce(false, "Bigger Bullet, 10% bonus damage to bosses per item", "blue");
+                            break;
+                        case "04":
+                            responce(false, "Armor, reduce damage by one per item", "blue");
+                            break;
+                        case "06":
+                            responce(false, "Steak, +10 max hp per item", "blue");
+                            break;
+                        case "07":
+                            responce(false, "Guilotine, 50 % more damage to full health enemies", "blue");
+                            break;
+                        case "09":
+                            responce(false, "Stun Grenade, 10% stun chance per item", "blue");
+                            break;
+                        case "10":
+                            responce(false, "Vampic Scepter, crit helas for 10% damage dealt", "blue");
+                            break;
+                        case "11":
+                            responce(false, "Choccy Milk, 10%  max health per item", "blue");
+                            break;
+                        case "12":
+                            responce(false, "Risky Fungus, no action heals for 5% max hp", "blue");
+                            break;
+                        case "13":
+                            responce(false, "Thorns, Return 10% damage taken", "blue");
+                            break;
+                        case "14":
+                            responce(false, "Pink Bull, 10% moove speed/dodge chance per item", "blue");
+                            break;
+                        case "18":
+                            responce(false, "Penetrator, 10% chance per item to deal 25% damage again ", "blue");
+                            break;
+                        case "20":
+                            responce(false, "Triumph, on kill heal 5% per item", "blue");
+                            break;
+                        case "21":
+                            responce(false, "Band A, if done >20 dmg +50% damage and heal", "blue");
+                            break;
+                        case "22":
+                            responce(false, "Band B, if done >20 dmg +50% damage and apply bleed)", "blue");
+                            break;
+                        case "23":
+                            responce(false, "Red Filter, crits stack bleed", "blue");
+                            break;
+                        case "25":
+                            responce(false, "Beacon, on death resurect with 50% hp", "blue");
+                            break;
+                        case "26":
+                            responce(false, "More Leaf Clover, +1 rolls for favourable outcomes", "blue");
+                            break;
+                        case "28":
+                            responce(false, "Holy Steak, Double helaing", "blue");
+                            break;
+                        case "30":
+                            responce(false, "Stone Mask, on death resurect with 100% hp", "blue");
+                            break;
+                        default:
+                            responce(false, "this item was either removed or doenst exist at all", "red");
+                            break;
                     }
+                        
                     break;
             }
         }

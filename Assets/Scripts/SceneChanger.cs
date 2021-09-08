@@ -10,6 +10,8 @@ public class SceneChanger : MonoBehaviour
 {
 	public GameObject MainMenu;
 	public GameObject Settings;
+	public GameObject Tutorial;
+
 	public TMP_Text txt;
 
 
@@ -34,15 +36,29 @@ public class SceneChanger : MonoBehaviour
 		{
 			Settings.SetActive(false);
 			MainMenu.SetActive(true);
+			Tutorial.SetActive(false);
 		}
 		else if (!open)
 		{
 			Settings.SetActive(true);
 			MainMenu.SetActive(false);
+			Tutorial.SetActive(false);
+		}
+	}
+	public void tutorial(bool open) {
+		if (open) {
+			Settings.SetActive(true);
+			MainMenu.SetActive(false);
+			Tutorial.SetActive(false);
+		}
+		else if (!open) {
+			Settings.SetActive(false);
+			MainMenu.SetActive(false);
+			Tutorial.SetActive(true);
 		}
 	}
 
-    private void Update() {
+	private void Update() {
 		if (consoleController.finished)
 			txt.text = "Congrats you beat this very hard game !!!!!";
 		else if (consoleController.dead)

@@ -86,7 +86,7 @@ public class consoleController : MonoBehaviour
 
     private void Start() { // selects the inout pox automaticaly and gets rid of "unknown command" from pressing the play button
         showText();
-        consoleLog.text = ">> echo [string], attack, health, wait, item [number]";
+        consoleLog.text = ">> echo [string], attack, health, wait, item [number], a further tutorial is available in settings";
     }
 
     int PlayerDamageCalc() { //calculates the damage done by any enemy
@@ -116,7 +116,7 @@ public class consoleController : MonoBehaviour
         }
 
         if (itemManager.items.Contains("03") && enemy.hp == 50 | enemy.hp == 125 | enemy.hp == 75)// bonus to full hp
-            FD = FD + FD * 0.5;
+            FD = FD * 1.1;
 
         if (player.bleedC <= rand.NextDouble()) {// bleed stacks
             enemy.bleedS += 1;
@@ -356,7 +356,7 @@ public class consoleController : MonoBehaviour
                                 responce(false, "Crit Lenses, 5% crit chance per item", "blue");
                                 break;
                             case "03":
-                                responce(false, "Bigger Bullet,+5 damage to bosses per item", "blue");
+                                responce(false, "Bigger Bullet, 10% bonus damage to bosses per item", "blue");
                                 break;
                             case "04":
                                 responce(false, "Armor, reduce damage by one per item", "blue");
